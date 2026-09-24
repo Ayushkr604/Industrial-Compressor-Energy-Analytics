@@ -17,3 +17,8 @@ real_data/
 confidential_data/
 *.xlsx
 *.xls
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
