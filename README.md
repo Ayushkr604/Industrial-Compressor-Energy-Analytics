@@ -183,3 +183,23 @@ Industrial-Compressor-Energy-Analytics/
 │
 ├── .gitignore
 └── README.md
+
+---
+
+## Key Results
+
+The initial analysis of the synthetic compressor dataset produced the following observations:
+
+- **CP-05** has the highest average power consumption at approximately **27.06 kW**.
+- **CP-04** has the lowest average power consumption at approximately **20.58 kW**.
+- Average compressor power shows a strong positive relationship with airflow.
+- Power vs. Flow correlation is approximately **0.918**.
+- The dataset contains **10,830 raw records** across five compressors.
+- **30 duplicate records** were identified and removed during data cleaning.
+- Missing sensor values were identified and handled during the cleaning stage.
+- Statistical outliers were flagged for further investigation rather than automatically removed.
+- SQL analysis was used to investigate compressor performance, load behavior, and time-series patterns.
+
+> These results are based entirely on synthetic portfolio data and are intended to demonstrate the analytical workflow.
+
+
