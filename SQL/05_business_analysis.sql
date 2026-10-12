@@ -179,3 +179,15 @@ GROUP BY Compressor_ID
 ORDER BY High_Power_High_Load_Readings DESC;
 
 
+
+-- CTE: Average power consumption by compressor
+WITH compressor_summary AS (
+    SELECT
+        Compressor_ID,
+        ROUND(AVG(Power_kW), 2) AS Average_Power
+    FROM compressor_data
+    GROUP BY Compressor_ID
+)
+SELECT *
+FROM compressor_summary
+ORDER BY Average_Power DESC;
