@@ -191,3 +191,16 @@ WITH compressor_summary AS (
 SELECT *
 FROM compressor_summary
 ORDER BY Average_Power DESC;
+
+
+
+-- Filter running readings, then filter compressor groups
+SELECT
+    Compressor_ID,
+    COUNT(*) AS Reading_Count,
+    ROUND(AVG(Power_kW), 2) AS Average_Power
+FROM compressor_data
+WHERE Running_Status = 'Running'
+GROUP BY Compressor_ID
+HAVING AVG(Power_kW) > 24
+ORDER BY Average_Power DESC;
