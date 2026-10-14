@@ -179,7 +179,6 @@ GROUP BY Compressor_ID
 ORDER BY High_Power_High_Load_Readings DESC;
 
 
-
 -- CTE: Average power consumption by compressor
 WITH compressor_summary AS (
     SELECT
@@ -193,7 +192,6 @@ FROM compressor_summary
 ORDER BY Average_Power DESC;
 
 
-
 -- Filter running readings, then filter compressor groups
 SELECT
     Compressor_ID,
@@ -204,3 +202,15 @@ WHERE Running_Status = 'Running'
 GROUP BY Compressor_ID
 HAVING AVG(Power_kW) > 24
 ORDER BY Average_Power DESC;
+
+
+-- Rank compressors by average power consumption
+SELECT
+    Compressor_ID,
+    ROUND(AVG(Power_kW), 2) AS Average_Power,
+    RANK() OVER (
+        ORDER BY AVG(Power_kW) DESC
+    ) AS Power_Rank
+FROM compressor_data
+GROUP BY Compressor_ID
+ORDER BY Power_Rank;
