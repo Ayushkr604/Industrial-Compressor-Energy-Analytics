@@ -1,0 +1,6 @@
+Compressor_ID,Total_Readings,Running_Readings,Stopped_Readings,Average_Current_A,Average_Power_kW,Average_Pressure_bar,Average_Flow_m3h,Average_Temperature_C,Average_Load_Percent
+CP-01,2160,2023,137,50.45,23.57,6.8,335.73,29.99,65.84
+CP-02,2160,2036,124,49.26,22.13,6.7,318.2,29.82,62.43
+CP-03,2160,2038,122,51.89,25.44,6.9,357.52,30.16,70.03
+CP-04,2160,2042,118,47.74,20.58,6.6,295.07,29.61,57.87
+CP-05,2160,2019,141,52.83,27.07,7.0,372.76,30.31,73.04

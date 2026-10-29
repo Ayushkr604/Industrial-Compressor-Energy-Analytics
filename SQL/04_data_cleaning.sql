@@ -127,9 +127,14 @@ LIMIT 10;
 
 
 
--- Create a cleaned analytical view
-CREATE VIEW IF NOT EXISTS cleaned_compressor_data AS
-SELECT
+-- ============================================================
+-- Create a deduplicated analytical view
+-- ============================================================
+
+DROP VIEW IF EXISTS cleaned_compressor_data;
+
+CREATE VIEW cleaned_compressor_data AS
+SELECT DISTINCT
     Timestamp,
     Compressor_ID,
     Running_Status,
@@ -140,15 +145,67 @@ SELECT
     Temperature_C,
     Load_Percent
 FROM compressor_data
-WHERE Power_kW >= 0
-  AND Current_A >= 0
-  AND Pressure_bar >= 0
-  AND Flow_m3h >= 0
-  AND Temperature_C >= 0
-  AND Load_Percent BETWEEN 0 AND 100;
+WHERE (Power_kW >= 0 OR Power_kW IS NULL)
+  AND (Current_A >= 0 OR Current_A IS NULL)
+  AND (Pressure_bar >= 0 OR Pressure_bar IS NULL)
+  AND (Flow_m3h >= 0 OR Flow_m3h IS NULL)
+  AND (Temperature_C >= 0 OR Temperature_C IS NULL)
+  AND (Load_Percent BETWEEN 0 AND 100 OR Load_Percent IS NULL);
 
 
-  -- Check cleaned record count
+-- Check cleaned record count
+
+SELECT
+    COUNT(*) AS Cleaned_Records
+FROM cleaned_compressor_data;
+
+
+-- Check duplicate records remaining
+
+SELECT
+    COUNT(*) AS Remaining_Duplicate_Rows
+FROM (
+    SELECT
+        Timestamp,
+        Compressor_ID,
+        Running_Status,
+        Current_A,
+        Power_kW,
+        Pressure_bar,
+        Flow_m3h,
+        Temperature_C,
+        Load_Percent
+    FROM cleaned_compressor_data
+    GROUP BY
+        Timestamp,
+        Compressor_ID,
+        Running_Status,
+        Current_A,
+        Power_kW,
+        Pressure_bar,
+        Flow_m3h,
+        Temperature_C,
+        Load_Percent
+    HAVING COUNT(*) > 1
+);
+
+
+-- Compressor-wise KPIs from cleaned data
+
+SELECT
+    Compressor_ID,
+    COUNT(*) AS Reading_Count,
+    ROUND(AVG(Power_kW), 2) AS Avg_Power_kW,
+    ROUND(AVG(Current_A), 2) AS Avg_Current_A,
+    ROUND(AVG(Flow_m3h), 2) AS Avg_Flow_m3h,
+    ROUND(AVG(Pressure_bar), 2) AS Avg_Pressure_bar,
+    ROUND(AVG(Load_Percent), 2) AS Avg_Load_Percent
+FROM cleaned_compressor_data
+GROUP BY Compressor_ID
+ORDER BY Avg_Power_kW DESC;
+
+
+-- Check cleaned record count
 SELECT
     COUNT(*) AS Cleaned_Records
 FROM cleaned_compressor_data;

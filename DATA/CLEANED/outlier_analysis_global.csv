@@ -1,0 +1,7 @@
+Analysis_Level,Sensor,Readings,Q1,Q3,IQR,Lower_Bound,Upper_Bound,Outlier_Count,Outlier_Percentage
+Global,Current_A,10800,48.71,54.05,5.34,40.7,62.06,666,6.17
+Global,Power_kW,10800,21.79,26.56,4.77,14.64,33.71,646,5.98
+Global,Pressure_bar,10770,6.66,6.94,0.28,6.24,7.36,7,0.06
+Global,Flow_m3h,10770,312.54,388.3,75.76,198.9,501.93,644,5.98
+Global,Temperature_C,10770,28.72,31.3,2.58,24.85,35.17,25,0.23
+Global,Load_Percent,10800,61.8,75.78,13.98,40.83,96.75,644,5.96
