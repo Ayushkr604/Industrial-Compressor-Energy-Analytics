@@ -1,264 +1,431 @@
-# Industrial Compressor Energy Analytics
+<div align="center">
 
-**An end-to-end Data Analytics project exploring industrial compressor performance, energy consumption, operating behaviour, and sensor data quality using Python, SQL, and Excel.**
+# ⚙️ Industrial Compressor Energy Analytics
 
-> **Disclaimer:** This project uses entirely synthetic data for educational and portfolio purposes. It does not contain actual industrial plant measurements and does not claim verified energy savings.
+### Turning Industrial Sensor Data into Business Insights
+
+**An End-to-End Data Analytics Portfolio Project**
+
+<p>
+  <img src="https://img.shields.io/badge/Python-Data%20Analysis-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/SQL-Analytics-4479A1?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQL">
+  <img src="https://img.shields.io/badge/Excel-Data%20Analysis-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" alt="Excel">
+  <img src="https://img.shields.io/badge/Power%20BI-In%20Progress-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI">
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/Records-10%2C800-0A7B83?style=flat-square" alt="Records">
+  <img src="https://img.shields.io/badge/Compressors-5-0A7B83?style=flat-square" alt="Compressors">
+  <img src="https://img.shields.io/badge/Period-Jan--Mar%202026-0A7B83?style=flat-square" alt="Observation period">
+  <img src="https://img.shields.io/badge/Data-Synthetic-orange?style=flat-square" alt="Synthetic data">
+</p>
 
 ---
 
-## 1. Project Overview
+*Exploring power consumption, airflow, operating load, sensor-data quality, and time-based patterns through Python, SQL, Excel, and Power BI preparation.*
 
-Industrial compressors are important energy-consuming assets in process industries. Analysing their power consumption, airflow, pressure, temperature, current, and operating load can help identify patterns and potential areas for further investigation.
+</div>
 
-This project demonstrates how raw sensor-style data can be transformed into structured datasets, analytical metrics, visualisations, and business-oriented insights.
+> [!IMPORTANT]
+> **Data integrity disclaimer:** All compressor readings in this project are synthetic and created for portfolio and learning purposes. They are not measurements from a real industrial plant. Energy figures are estimates, not verified energy consumption or demonstrated savings.
+
+---
+
+## 🧭 Table of Contents
+
+- [🎯 Project Overview](#-project-overview)
+- [💼 Business Problem](#-business-problem)
+- [📊 Dataset](#-dataset)
+- [🔄 Analytical Workflow](#-analytical-workflow)
+- [🔍 Key Findings](#-key-findings)
+- [📈 Visual Analysis](#-visual-analysis)
+- [🐍 Python Analysis](#-python-analysis)
+- [🗃️ SQL Analysis](#️-sql-analysis)
+- [📊 Power BI](#-power-bi)
+- [🛠️ Tools and Technologies](#️-tools-and-technologies)
+- [📂 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🗺️ Roadmap](#️-roadmap)
+- [⚠️ Limitations](#️-limitations)
+- [👤 Author](#-author)
+
+---
+
+## 🎯 Project Overview
+
+Industrial compressors are important assets in process industries. Analysing their power, airflow, pressure, temperature, current, and load together can help uncover operating patterns and identify areas that deserve further investigation.
+
+This project demonstrates how to transform raw sensor-style data into a structured analytical workflow using data cleaning, exploratory data analysis, SQL queries, business-oriented metrics, and visualisations.
+
+The objective is not simply to create charts. It is to demonstrate how an analyst can move from raw data to **reliable measurements, meaningful comparisons, and clearly communicated findings.**
+
+### ✨ What This Project Demonstrates
+
+- 🧹 Data cleaning and quality validation
+- 🔎 Missing-value and duplicate-record investigation
+- 📉 Statistical outlier analysis
+- 🐍 Python and Pandas-based exploratory analysis
+- 🗃️ SQL queries for business-oriented questions
+- 📊 Compressor-level KPI comparisons
+- 📅 Time-based analysis and visualisation
+- 📈 Preparation of data for Power BI reporting
+- 💡 Interpretation of findings with appropriate limitations
+
+---
+
+## 💼 Business Problem
+
+Industrial compressors operate under changing loads, airflow rates, pressures, temperatures, and operating conditions.
+
+Looking at power consumption alone may not provide enough context to compare equipment fairly. Analysts need to investigate several variables together, understand data quality, and distinguish observations from conclusions.
 
 ### Business Questions
 
-- Which compressors have the highest average power consumption?
-- How does power consumption relate to airflow?
-- How do operating load and compressor status vary?
-- Which sensor readings are missing or statistically unusual?
-- How does compressor behaviour change over time?
-- Which operating patterns deserve further investigation?
-- How can the analysis support future dashboards and anomaly detection?
+| # | Business question | Analytical approach |
+|---|---|---|
+| 01 | Which compressors have the highest average power while running? | Grouping and KPI analysis |
+| 02 | How does power relate to airflow? | Correlation and comparative analysis |
+| 03 | How do operating patterns change over time? | Time-series analysis |
+| 04 | How much sensor data is missing or duplicated? | Data-quality checks |
+| 05 | Which readings are statistically unusual? | Outlier investigation |
+| 06 | How do compressors differ in load and temperature? | Comparative EDA |
+| 07 | How can these findings be communicated clearly? | Visualisation and dashboard preparation |
+| 08 | What additional validation would be required before recommending operational changes? | Business interpretation and limitations |
 
-## 2. Project Objectives
+### 🎯 Project Objective
 
-- Assess and improve data quality.
-- Identify duplicate records and missing sensor values.
-- Investigate statistical outliers.
-- Calculate compressor-level performance indicators.
-- Analyse power, current, pressure, airflow, temperature, and load.
-- Perform time-series and correlation analysis.
-- Use SQL to answer business-oriented questions.
-- Build reproducible Python analysis workflows.
-- Prepare data for interactive Power BI reporting.
-- Develop evidence-based recommendations while acknowledging analytical limitations.
+Build a reproducible analytics workflow that demonstrates how data can be cleaned, analysed, queried, visualised, and prepared for business reporting.
 
-## 3. Dataset Description
+---
 
-The project uses a synthetic dataset representing hourly measurements from five fictional industrial compressors.
+## 📊 Dataset
 
-| Column | Description |
-|---|---|
-| `Timestamp` | Date and time of each observation |
-| `Compressor_ID` | Compressor identifier |
-| `Running_Status` | Running or stopped status |
-| `Current_A` | Motor current in amperes |
-| `Power_kW` | Electrical power in kilowatts |
-| `Pressure_bar` | Pressure reading in bar |
-| `Flow_m3h` | Airflow in cubic metres per hour |
-| `Temperature_C` | Temperature in degrees Celsius |
-| `Load_Percent` | Compressor load percentage |
+The project uses a synthetic dataset representing hourly operating measurements from five fictional compressors.
 
-### Dataset Summary
+### Dataset at a Glance
 
 | Metric | Value |
 |---|---:|
-| Observation period | January–March 2026 |
+| Observation period | 1 January–31 March 2026 |
 | Raw records | 10,830 |
 | Cleaned records | 10,800 |
-| Number of compressors | 5 |
-| Sampling frequency | Hourly |
+| Duplicate records removed | 30 |
+| Compressors | 5 |
+| Sampling interval | Hourly |
 | Dataset type | Synthetic |
 
-The cleaned dataset is stored in:
+### Dataset Fields
 
-`DATA/CLEANED/compressor_data_cleaned.csv`
-
-The cleaned dataset contains 10,800 records. It preserves 30 missing readings each in pressure, airflow, and temperature for transparent data-quality analysis.
-
-## 4. Tools and Technologies
-
-| Technology | Purpose |
+| Field | Description |
 |---|---|
-| Python | Data analysis and automation |
-| Pandas | Data manipulation and cleaning |
-| Matplotlib | Data visualisation |
-| SQL | Data querying and business analysis |
-| SQLite | Local analytical database |
-| Microsoft Excel | Data preparation, KPI analysis, and spreadsheet-based EDA |
-| Power BI | Interactive dashboard development |
-| Git | Version control |
-| GitHub | Project hosting and documentation |
+| `Timestamp` | Date and time of the observation |
+| `Compressor_ID` | Compressor identifier, CP-01 to CP-05 |
+| `Running_Status` | Whether the compressor is running or stopped |
+| `Current_A` | Motor current in amperes |
+| `Power_kW` | Electrical power in kilowatts |
+| `Pressure_bar` | Pressure reading in bar |
+| `Flow_m3h` | Airflow rate in cubic metres per hour |
+| `Temperature_C` | Temperature reading in degrees Celsius |
+| `Load_Percent` | Load percentage |
 
-## 5. Project Workflow
+**Cleaned dataset:** `DATA/CLEANED/compressor_data_cleaned.csv`
 
-The project follows an end-to-end analytical workflow.
+The cleaned dataset contains 10,800 records. It preserves 30 missing values each in `Pressure_bar`, `Flow_m3h`, and `Temperature_C`.
 
-1. **Data inspection:** Review dataset structure, timestamps, sensor fields, and compressor coverage.
-2. **Data cleaning:** Identify duplicate records and validate sensor values.
-3. **Missing-value analysis:** Quantify missing readings and investigate appropriate handling methods.
-4. **Outlier analysis:** Identify statistically unusual readings for further investigation.
-5. **Exploratory Data Analysis:** Compare compressor performance and examine relationships between variables.
-6. **SQL analysis:** Use aggregations, joins, subqueries, CTEs, and window functions to investigate business questions.
-7. **Visualisation:** Generate charts and summary tables.
-8. **Power BI preparation:** Create a dashboard-ready dataset.
-9. **Future development:** Build an interactive dashboard and investigate possible anomaly-detection applications.
+Missing readings are treated as data-quality issues to investigate. They are not automatically evidence of equipment failure.
 
-## 6. Key Analytical Findings
+---
 
-The following findings are based on the current Python analysis of the synthetic dataset.
+## 🔄 Analytical Workflow
 
-### 6.1 Compressor Power Comparison
+The project follows a structured workflow from raw data to reporting.
 
-Average power consumption was calculated using observations where the compressor status was `Running`.
+```text
+       SYNTHETIC RAW DATA
+               │
+               ▼
+      DATA INSPECTION
+  Schema, timestamps, records
+               │
+               ▼
+       DATA CLEANING
+ Duplicates and validity checks
+               │
+               ▼
+     DATA QUALITY REVIEW
+ Missing values and outliers
+               │
+               ▼
+    EXPLORATORY ANALYSIS
+ Compressor KPIs and patterns
+               │
+         ┌─────┴─────┐
+         ▼           ▼
+     SQL ANALYSIS  PYTHON EDA
+         │           │
+         └─────┬─────┘
+               ▼
+      BUSINESS INTERPRETATION
+               │
+               ▼
+       POWER BI PREPARATION
+               │
+               ▼
+    INTERACTIVE DASHBOARD
+        In progress
+```
 
-| Compressor | Running Readings | Average Power |
-|---|---:|---:|
-| CP-05 | 2,019 | 28.07 kW |
-| CP-03 | 2,038 | 26.22 kW |
-| CP-01 | 2,023 | 24.37 kW |
-| CP-02 | 2,036 | 22.79 kW |
-| CP-04 | 2,042 | 21.12 kW |
+### Workflow Stages
 
-**Finding:** CP-05 has the highest average running power, while CP-04 has the lowest.
+1. **Data inspection:** Review schema, record counts, timestamps, compressor coverage, and operating status.
+2. **Data cleaning:** Identify duplicate records and validate data against basic checks.
+3. **Missing-value analysis:** Quantify missing readings and examine possible handling approaches.
+4. **Outlier investigation:** Flag unusual observations for review rather than automatically removing them.
+5. **Exploratory data analysis:** Compare compressor metrics, inspect correlations, and investigate operating patterns.
+6. **SQL analysis:** Apply filtering, aggregation, joins, subqueries, CTEs, and window functions.
+7. **Dashboard preparation:** Export a structured CSV for Power BI.
+8. **Reporting:** Develop an interactive dashboard and communicate findings with appropriate caveats.
 
-**Business interpretation:** This comparison identifies differences in power consumption. It does not establish which compressor is most or least efficient because the compressors may operate under different airflow, pressure, and load conditions.
+---
 
-### 6.2 Relationship Between Power and Airflow
+## 🔍 Key Findings
 
-The running-only correlation between power consumption and airflow is approximately **0.851**.
+The following findings come from the current Python analysis of the synthetic dataset.
 
-**Finding:** Higher airflow readings are generally associated with higher power consumption in the synthetic dataset.
+### 1. Average Power While Running
 
-**Business interpretation:** Airflow is an important variable to consider when analysing compressor power. Correlation alone does not establish causation or prove energy efficiency.
+| Rank | Compressor | Running readings | Average power |
+|---:|---|---:|---:|
+| 1 | CP-05 | 2,019 | 28.07 kW |
+| 2 | CP-03 | 2,038 | 26.22 kW |
+| 3 | CP-01 | 2,023 | 24.37 kW |
+| 4 | CP-02 | 2,036 | 22.79 kW |
+| 5 | CP-04 | 2,042 | 21.12 kW |
 
-### 6.3 Operating Status
+**Observation:** CP-05 has the highest average running power, while CP-04 has the lowest.
 
-The dataset contains:
+**Business interpretation:** This difference is a starting point for further analysis, not proof that CP-05 is less efficient. A fair comparison would need to account for airflow, pressure, load, and equipment design.
 
-- **10,158 running observations**
-- **642 stopped observations**
+### 2. Relationship Between Power and Airflow
 
-Operating-status analysis helps compare how frequently each compressor is recorded as running or stopped.
+The running-only correlation between power and airflow is approximately:
 
-These observations represent hourly records, not independently verified equipment operating logs.
+**0.851**
 
-### 6.4 Data Quality
+This indicates a strong positive association in the synthetic observations: higher airflow tends to be associated with higher power.
 
-The Python analysis identified:
+Correlation does not establish causation. Further analysis would be required to understand the effect of operating conditions and determine whether a meaningful efficiency comparison is possible.
 
-- 10,800 cleaned records.
-- No duplicate rows in the cleaned dataset.
-- 30 missing pressure readings.
-- 30 missing airflow readings.
-- 30 missing temperature readings.
-- Statistically unusual temperature readings requiring investigation.
+### 3. Operating Status
 
-Outliers are flagged for review rather than automatically classified as equipment faults.
+| Operating status | Observations |
+|---|---:|
+| Running | 10,158 |
+| Stopped | 642 |
+| **Total** | **10,800** |
 
-### 6.5 Estimated Energy Consumption
+Separating running and stopped observations helps avoid mixing different operating states when calculating comparison metrics.
 
-The project calculates estimated energy summaries by treating each hourly power observation as representing one hour.
+### 4. Data Quality
 
-These calculations are estimates derived from synthetic data, not verified meter readings. They should not be interpreted as actual plant energy consumption or measured energy savings.
+| Check | Result |
+|---|---|
+| Raw records | 10,830 |
+| Cleaned records | 10,800 |
+| Duplicate rows in cleaned data | 0 reported |
+| Missing pressure readings | 30 |
+| Missing airflow readings | 30 |
+| Missing temperature readings | 30 |
 
-## 7. Python Analysis
+### 5. Important Interpretation
 
-Python scripts are organised in the `PYTHON/` directory.
+Power-to-flow ratios can provide an additional comparison metric, but they are not, by themselves, a validated measure of compressor efficiency.
+
+Meaningful comparisons require appropriate operating context, including pressure, load, airflow, and compressor design.
+
+> **Key takeaway:** The analysis identifies patterns worth investigating. It does not claim verified energy savings, equipment faults, or real-world performance improvements.
+
+---
+
+## 📈 Visual Analysis
+
+The Python EDA workflow generates charts and summary tables to support the findings.
+
+### ⚡ Compressor Power Comparison
+
+![Average running power by compressor](OUTPUT/EDA/charts/running_power_comparison.png)
+
+*Compares average power across compressors using running observations.*
+
+### 📅 Monthly Power Trends
+
+![Monthly running power](OUTPUT/EDA/charts/monthly_running_power.png)
+
+*Provides a monthly view of power patterns in the synthetic dataset.*
+
+### 🌡️ Operating Temperature
+
+![Average running temperature](OUTPUT/EDA/charts/average_running_temperature.png)
+
+*Shows average running temperature by compressor.*
+
+### 🔗 Sensor Correlations
+
+![Sensor correlation matrix](OUTPUT/EDA/charts/sensor_correlation_matrix.png)
+
+*Visualises relationships between numerical sensor variables.*
+
+All charts are saved under `OUTPUT/EDA/charts/`. Summary CSV files are available under `OUTPUT/EDA/`.
+
+> **Note:** Chart interpretations are limited to the synthetic dataset and should not be generalised to real industrial equipment.
+
+---
+
+## 🐍 Python Analysis
+
+Python scripts are stored in the `PYTHON/` directory.
 
 | Script | Purpose |
 |---|---|
-| `01_python_setup.py` | Initial setup and dataset inspection |
+| `01_python_setup.py` | Initial Python setup and inspection |
 | `02_python_fundamentals.py` | Python fundamentals |
-| `03_pandas_basics.py` | Pandas operations |
-| `04_data_quality_and_cleaning.py` | Data-quality checks and cleaning |
-| `05_missing_values_and_imputation.py` | Missing-value analysis |
+| `03_pandas_basics.py` | Pandas basics |
+| `04_data_quality_and_cleaning.py` | Data-quality and cleaning analysis |
+| `05_missing_values_and_imputation.py` | Missing-value investigation |
 | `06_outlier_analysis.py` | Statistical outlier analysis |
-| `07_exploratory_data_analysis.py` | EDA, summary tables, and charts |
-| `08_sync_sql_database.py` | Synchronise the local SQL database with the cleaned CSV |
+| `07_exploratory_data_analysis.py` | EDA summaries and visualisations |
+| `08_sync_sql_database.py` | Synchronises local SQLite data from the cleaned CSV |
 
-### Python Visualisations
+### Python EDA Outputs
 
-Generated charts are stored in `OUTPUT/EDA/charts/`.
+The EDA workflow generates summary tables and visualisations covering:
 
-Current visualisations include:
+- Compressor-level metrics
+- Running power comparisons
+- Estimated energy summaries
+- Operating patterns
+- Stopped periods
+- Temperature comparisons
+- Sensor correlations
+- Time-based analysis
 
-- `running_power_comparison.png`
-- `monthly_running_power.png`
-- `average_running_temperature.png`
-- `sensor_correlation_matrix.png`
+### Power BI-Ready Dataset
 
-Summary tables are available as CSV files under `OUTPUT/EDA/`.
-
-## 8. SQL Analysis
-
-The SQL scripts are stored in the `SQL/` directory.
-
-The analysis covers:
-
-- Data filtering and sorting.
-- Aggregate functions and conditional aggregation.
-- Compressor-level KPIs.
-- Data cleaning and quality checks.
-- Joins and compressor master-data integration.
-- Subqueries and Common Table Expressions.
-- Window functions such as `ROW_NUMBER()`, `RANK()`, and `LAG()`.
-- Daily and monthly performance analysis.
-- Power-to-flow comparisons.
-- High-load and high-power observations.
-- Hour-to-hour power changes.
-
-The SQLite database is a generated local artifact and is excluded from version control.
-
-## 9. Excel Analysis
-
-The Excel workbook is stored at:
-
-`EXCEL/Compressor_Analysis.xlsx`
-
-The Excel workflow covers data preparation, data-quality checks, missing-value analysis, duplicate detection, KPI analysis, outlier investigation, and exploratory analysis.
-
-## 10. Power BI Dashboard
-
-A Power BI-ready dataset has been generated at:
+The prepared import file is:
 
 `OUTPUT/POWER_BI/compressor_powerbi.csv`
 
-The file contains 10,800 records and includes the original sensor fields along with derived date, hour, month, and power-to-flow fields.
+It contains 10,800 rows and includes the source fields plus derived date, hour, month, and power-to-flow fields.
 
-The interactive Power BI dashboard is the next phase of the project.
+---
+
+## 🗃️ SQL Analysis
+
+SQL scripts are stored in `SQL/`.
+
+The project covers:
+
+- Basic exploration and filtering
+- Data cleaning and quality checks
+- Time-series analysis
+- Joins and compressor master-data integration
+- Business analysis and compressor KPIs
+- Aggregations and grouped analysis
+- Subqueries and common table expressions
+- Window functions
+
+### SQL Files
+
+| File | Focus |
+|---|---|
+| `01_basic_analysis.sql` | Basic analysis |
+| `02_time_series_analysis.sql` | Time-based analysis |
+| `03_joins.sql` | Joins |
+| `04_data_cleaning.sql` | Data-quality and cleaning queries |
+| `05_business_analysis.sql` | Business-focused analysis |
+
+The local SQLite database is generated from the cleaned CSV and excluded from version control.
+
+**Database caution:** The synchronisation script replaces the `compressor_data` table in the local database. Back up the database before running it if you need to preserve existing contents.
+
+---
+
+## 📊 Power BI
+
+The dataset has been prepared for Power BI, and the interactive dashboard is the next phase of the project.
 
 ### Planned Dashboard Components
 
-- KPI cards for compressor performance.
-- Compressor-level power comparison.
-- Monthly operating trends.
-- Airflow and power relationships.
-- Load and operating-status analysis.
-- Interactive filters and compressor-level comparisons.
-- Business findings and recommendations.
+| Visual | Purpose |
+|---|---|
+| KPI cards | Summarise records, compressors, and clearly defined metrics |
+| Compressor comparison | Compare average running power |
+| Monthly trend | Explore power patterns over time |
+| Operating status | Compare running and stopped observations |
+| Sensor analysis | Explore pressure, airflow, temperature, and load |
+| Data-quality view | Communicate missing readings and data limitations |
 
-## 11. Business Implications
+### Dashboard Status
 
-The current analysis supports exploratory comparisons and helps identify questions for further investigation.
+- [x] Power BI-ready CSV exported
+- [ ] Import data into Power BI Desktop
+- [ ] Build KPI cards and comparison charts
+- [ ] Add time-based visualisations
+- [ ] Validate calculations and labels
+- [ ] Capture the final dashboard preview
 
-Potential next steps include:
+Energy figures will be labelled as estimates wherever applicable. The dashboard will not present synthetic results as actual plant measurements.
 
-1. Compare compressors operating under similar pressure, airflow, and load conditions.
-2. Validate energy calculations against actual meter readings if authorised real-world data becomes available.
-3. Investigate unusual sensor readings before classifying them as faults.
-4. Use the Power BI dashboard to communicate trends and performance indicators.
-5. Evaluate anomaly-detection methods after establishing reliable data-quality checks and analytical baselines.
+---
 
-No real-world energy savings or equipment-performance improvements are claimed.
+## 🛠️ Tools and Technologies
 
-## 12. Project Structure
+<p>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas">
+  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat-square" alt="Matplotlib">
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite">
+  <img src="https://img.shields.io/badge/Microsoft%20Excel-217346?style=flat-square&logo=microsoftexcel&logoColor=white" alt="Excel">
+  <img src="https://img.shields.io/badge/Power%20BI-F2C811?style=flat-square&logo=powerbi&logoColor=black" alt="Power BI">
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
+  <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub">
+</p>
+
+| Technology | Application |
+|---|---|
+| Python | Analysis scripts and reproducible workflows |
+| Pandas | Data manipulation and quality checks |
+| Matplotlib | Data visualisation |
+| SQL / SQLite | Querying, aggregation, joins, and business analysis |
+| Microsoft Excel | Spreadsheet-based cleaning, KPIs, and analysis |
+| Power BI | Dashboard preparation and planned interactive reporting |
+| Git / GitHub | Version control and project documentation |
+
+---
+
+## 📂 Project Structure
 
 ```text
 Industrial-Compressor-Energy-Analytics/
 │
 ├── DATA/
 │   ├── RAW/
+│   │   └── synthetic_compressor_data_raw.csv
 │   └── CLEANED/
+│       └── compressor_data_cleaned.csv
 │
 ├── EXCEL/
 │   └── Compressor_Analysis.xlsx
 │
 ├── OUTPUT/
 │   ├── EDA/
-│   │   └── charts/
+│   │   ├── charts/
+│   │   │   ├── running_power_comparison.png
+│   │   │   ├── monthly_running_power.png
+│   │   │   ├── average_running_temperature.png
+│   │   │   └── sensor_correlation_matrix.png
+│   │   └── summary CSV files
+│   │
 │   └── POWER_BI/
 │       └── compressor_powerbi.csv
 │
@@ -283,19 +450,48 @@ Industrial-Compressor-Energy-Analytics/
 └── README.md
 ```
 
-This structure highlights the primary project folders. Additional files may be present in the repository.
+*The tree above highlights the principal project files; some output files and supporting folders are omitted for readability.*
 
-## 13. How to Run the Python Analysis
+---
 
-Run the following commands from the project root in an environment where Python and the required packages are installed.
+## 🚀 Getting Started
 
-Install the main dependencies:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Ayushkr604/Industrial-Compressor-Energy-Analytics.git
+cd Industrial-Compressor-Energy-Analytics
+```
+
+### 2. Create a Virtual Environment (Optional)
+
+```bash
+python -m venv .venv
+```
+
+Activate it on Windows:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+On macOS or Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install Python Dependencies
 
 ```bash
 python -m pip install pandas matplotlib
 ```
 
-Run the analysis scripts:
+Check each script's imports for any additional package requirements.
+
+### 4. Run the Analysis
+
+Run the scripts from the repository root and in workflow order where one step depends on files produced by an earlier step.
 
 ```bash
 python PYTHON/04_data_quality_and_cleaning.py
@@ -304,56 +500,90 @@ python PYTHON/06_outlier_analysis.py
 python PYTHON/07_exploratory_data_analysis.py
 ```
 
-Run scripts in workflow order when setting up the project from scratch. Some steps may rely on files generated by earlier scripts.
-
-### Synchronise the SQL Database
-
-To rebuild the local SQLite data from the cleaned CSV:
+### 5. Synchronise the Local SQL Database (Optional)
 
 ```bash
 python PYTHON/08_sync_sql_database.py
 ```
 
-**Caution:** This script replaces the `compressor_data` table in the local database. Back up the database first if you need to preserve its current contents.
+> [!WARNING]
+> This script replaces the `compressor_data` table in `SQL/compressor_analysis.db`. Back up the database first if you need its existing contents. The local database is a generated artifact and should not be committed to Git.
 
-## 14. Project Status
+---
 
-### Completed
+## 🗺️ Roadmap
 
-- [x] Synthetic dataset and data dictionary
-- [x] Excel data cleaning and KPI analysis
-- [x] SQL data cleaning and business analysis
-- [x] SQL joins and time-series analysis
-- [x] SQL window-function analysis
+### ✅ Completed
+
+- [x] Synthetic dataset creation
+- [x] Data dictionary and dataset inspection
+- [x] Excel-based cleaning and KPI/EDA work
+- [x] SQL analysis scripts
 - [x] Python data-quality analysis
 - [x] Missing-value investigation
 - [x] Statistical outlier analysis
 - [x] Python EDA and visualisations
-- [x] Power BI-ready CSV preparation
-- [x] SQL database synchronisation
+- [x] Summary tables and chart outputs
+- [x] Power BI-ready CSV export
+- [x] SQLite synchronisation with the cleaned dataset
+- [x] Project README and documentation
 
-### Upcoming
+### 🚧 In Progress / Planned
 
-- [ ] Build the interactive Power BI dashboard
-- [ ] Finalise the business-facing portfolio report
-- [ ] Review and refine recommendations
-- [ ] Explore a carefully validated anomaly-detection extension
-
-## 15. Limitations
-
-- The dataset is synthetic and may not reproduce real compressor behaviour.
-- Correlations are descriptive and do not prove causation.
-- Absolute power consumption does not establish equipment efficiency.
-- Estimated energy depends on the hourly-reading assumption.
-- Statistical outliers require investigation and are not automatically equipment faults.
-- No verified energy savings, predictive accuracy, or maintenance outcomes are claimed.
-
-## Author
-
-**Ayush Kumar**
-Computer Science Engineering
-BITS Pilani
+- [ ] Interactive Power BI dashboard
+- [ ] Final business-facing report
+- [ ] Additional dashboard validation
+- [ ] End-to-end setup and dependency documentation
+- [ ] Explore an anomaly-detection extension after validating the analytical baseline
 
 ---
 
-**Project focus:** Transforming synthetic sensor data into structured analysis, performance comparisons, and business-oriented insights using Python, SQL, and Excel.
+## ⚠️ Limitations
+
+Responsible analysis requires clear boundaries around what the data can establish.
+
+- **Synthetic data:** The dataset may not reflect the dynamics of real industrial compressors.
+- **Correlation is not causation:** Relationships between power and airflow are descriptive.
+- **Power is not efficiency:** Absolute power differences do not establish efficiency differences.
+- **Estimated energy:** Energy summaries assume hourly power observations represent one hour each.
+- **Outlier interpretation:** Unusual observations may be errors or valid operating events; they require investigation.
+- **Operational recommendations:** Real-world decisions require validated data, domain expertise, and comparable operating conditions.
+- **No savings claims:** This project does not demonstrate verified energy savings, maintenance outcomes, or predictive-model accuracy.
+
+---
+
+## 💡 Business Implications and Next Steps
+
+The current analysis supports exploratory comparisons rather than direct operational decisions.
+
+A responsible next phase would:
+
+1. Compare compressors under similar pressure, airflow, and load conditions.
+2. Validate energy calculations against actual meter readings if real, authorised data becomes available.
+3. Review flagged sensor readings with domain experts before classifying them as faults.
+4. Build a Power BI dashboard with transparent KPI definitions and clear data-quality context.
+5. Consider anomaly-detection models only after validating the dataset, defining useful targets, and establishing a reliable baseline.
+
+---
+
+## 👤 Author
+
+<div align="center">
+
+### Ayush Kumar
+
+**Computer Science Engineering | BITS Pilani**
+
+*Data Analytics • Python • SQL • Excel • Power BI*
+
+</div>
+
+---
+
+<div align="center">
+
+**Built as a data analytics portfolio project.**
+
+*From raw data to analysis, interpretation, and visual storytelling.*
+
+</div>
